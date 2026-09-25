@@ -1,0 +1,34 @@
+{
+  "n_total": 768,
+  "n_features": 8,
+  "n_train": 614,
+  "n_test": 154,
+  "cv_scores": [
+    0.8293,
+    0.8455,
+    0.748,
+    0.7561,
+    0.877
+  ],
+  "cv_mean": 81.12,
+  "cv_std": 5.07,
+  "accuracy": 82.47,
+  "precision": 81.4,
+  "recall": 64.81,
+  "f1": 72.16,
+  "tn": 92,
+  "fp": 8,
+  "fn": 19,
+  "tp": 35,
+  "coefficients": {
+    "Pregnancies": 0.6868,
+    "Glucose": 1.3076,
+    "BloodPressure": 0.0764,
+    "SkinThickness": 0.2323,
+    "Insulin": 0.3673,
+    "BMI": 0.7524,
+    "DiabetesPedigreeFunction": 0.2672,
+    "Age": 0.5523
+  },
+  "intercept": -0.9905
+}

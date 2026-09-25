@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Diabetic Prediction System</title>
+<style>
+  :root { --accent:#1f4e5f; --accent-light:#eaf1f3; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f4f7f8;
+    margin: 0;
+    padding: 0;
+    color: #222;
+  }
+  header {
+    background: var(--accent);
+    color: #fff;
+    padding: 28px 20px;
+    text-align: center;
+  }
+  header h1 { margin: 0; font-size: 26px; }
+  header p { margin: 6px 0 0; opacity: .85; font-size: 14px; }
+  main {
+    max-width: 640px;
+    margin: 32px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    padding: 28px 32px 36px;
+  }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  label { display:block; font-size: 13px; font-weight: 600; margin-bottom: 4px; color:#444; }
+  input {
+    width: 100%; padding: 9px 10px; border: 1px solid #cfd8db;
+    border-radius: 6px; font-size: 14px;
+  }
+  button {
+    margin-top: 22px; width: 100%; padding: 12px; border: none;
+    border-radius: 6px; background: var(--accent); color: #fff;
+    font-size: 16px; font-weight: 600; cursor: pointer;
+  }
+  button:hover { opacity: .92; }
+  #result {
+    margin-top: 22px; padding: 16px; border-radius: 8px;
+    display: none; font-size: 15px;
+  }
+  .pos { background: #fdecea; color: #a33; border: 1px solid #f3c6c1; }
+  .neg { background: #eaf7ec; color: #2a7a3b; border: 1px solid #c7e8cc; }
+  footer { text-align:center; color:#888; font-size:12px; padding: 24px 0; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Diabetic Prediction System</h1>
+    <p>Logistic Regression Classifier · Naviotech Solution Pvt. Ltd. Internship</p>
+  </header>
+
+  <main>
+    <form id="predict-form">
+      <div class="grid">
+        <div><label>Pregnancies</label><input type="number" id="Pregnancies" step="1" required></div>
+        <div><label>Glucose</label><input type="number" id="Glucose" step="0.1" required></div>
+        <div><label>Blood Pressure</label><input type="number" id="BloodPressure" step="0.1" required></div>
+        <div><label>Skin Thickness</label><input type="number" id="SkinThickness" step="0.1" required></div>
+        <div><label>Insulin</label><input type="number" id="Insulin" step="0.1" required></div>
+        <div><label>BMI</label><input type="number" id="BMI" step="0.1" required></div>
+        <div><label>Diabetes Pedigree Function</label><input type="number" id="DiabetesPedigreeFunction" step="0.001" required></div>
+        <div><label>Age</label><input type="number" id="Age" step="1" required></div>
+      </div>
+      <button type="submit">Predict</button>
+    </form>
+    <div id="result"></div>
+  </main>
+
+  <footer>Group Project · Sristi Thakur · Diabetic Prediction using Logistic Regression</footer>
+
+<script>
+  // Replace with your deployed backend URL after deployment on Render.
+  const API_URL = "http://127.0.0.1:5000/predict";
+
+  const form = document.getElementById("predict-form");
+  const result = document.getElementById("result");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const fields = ["Pregnancies","Glucose","BloodPressure","SkinThickness","Insulin","BMI","DiabetesPedigreeFunction","Age"];
+    const payload = {};
+    fields.forEach(f => payload[f] = document.getElementById(f).value);
+
+    result.style.display = "block";
+    result.className = "";
+    result.textContent = "Predicting...";
+
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+
+      result.className = data.prediction === "Diabetic" ? "pos" : "neg";
+      result.innerHTML = `<strong>${data.prediction}</strong><br>Probability of diabetes: ${(data.probability_diabetic*100).toFixed(1)}%`;
+    } catch (err) {
+      result.className = "pos";
+      result.textContent = "Error: " + err.message;
+    }
+  });
+</script>
+</body>
+</html>
