@@ -64,11 +64,10 @@ script to point at your backend once deployed).
 
 ## Deployment
 
-- **Backend** — deploy `backend/` to [Render](https://render.com) as a Python
-  web service (`gunicorn app:app`, build command `pip install -r requirements.txt`).
-- **Frontend** — deploy `frontend/` to [Vercel](https://vercel.com) as a static
-  site, after updating `API_URL` in `index.html` to your live backend URL.
+- **Backend** — deployed on Render as a Python web service (`gunicorn app:app`).
+- **Frontend** — deployed on Vercel as a static site.
 
-> Update the live URLs below once deployed, and in the project report/PPT:
+> The deployed application URLs are listed below and should also be used in the project report/PPT:
+>
 > - Live Application: https://diabetes-project-ruddy.vercel.app
 > - Backend API: https://diabetes-prediction-api-hcj6.onrender.com
