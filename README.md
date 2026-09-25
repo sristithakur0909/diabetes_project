@@ -5,7 +5,7 @@ Naviotech Solution Pvt. Ltd. — Machine Learning Internship
 
 Predicts whether a patient is likely diabetic from routine diagnostic
 measurements, using a Logistic Regression classifier trained on the
-[Pima Indians Diabetes Dataset](https://www.kaggle.com/datasets/kandij/diabetes-dataset).
+[kandij/diabetes-dataset](https://www.kaggle.com/datasets/kandij/diabetes-dataset).
 
 ## Project Structure
 
@@ -70,5 +70,5 @@ script to point at your backend once deployed).
   site, after updating `API_URL` in `index.html` to your live backend URL.
 
 > Update the live URLs below once deployed, and in the project report/PPT:
-> - Live Application: `https://<your-frontend>.vercel.app`
-> - Backend API: `https://<your-backend>.onrender.com`
+> - Live Application: https://diabetes-project-ruddy.vercel.app
+> - Backend API: https://diabetes-prediction-api-hcj6.onrender.com
